@@ -13,7 +13,13 @@ ItemType::ItemType(int num) {
 } //ItemType
 
 Comparison ItemType::compareTo(ItemType item) {
-
+    if (value < item.getValue()) {
+        return Comparison.LESS;
+    } else if (value == item.getValue()) {
+        return Comparison.EQUAL;
+    } else if (value > item.getValue()) {
+        return Comparison.GREATER
+    } //if
 } //compareTo
 
 int ItemType::getValue() const {
