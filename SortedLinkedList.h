@@ -1,3 +1,6 @@
+#include "ItemType.h"
+#include "ListNode.h"
+
 #ifndef SORTEDLINKEDLIST_H
 #define SORTEDLINKEDLIST_H
 
@@ -11,14 +14,16 @@ private:
 public:
     SortedLinkedList();
     ~SortedLinkedList();
-    int length() const;
+    int getLength();
     void insertItem(ItemType item);
     void deleteItem(ItemType item);
     int searchItem(ItemType item);
     ItemType getNextItem();
-    void ResetList();
-    //Merge()
-    //DeleteAlternateNodes()
-    //FindCommonElements()
-
+    void resetList();
+    void merge(SortedLinkedList l);
+    void deleteAlt();
+    void intersection(SortedLinkedList l);
+    void printList();
 }; //SortedLinkedList
+
+#endif

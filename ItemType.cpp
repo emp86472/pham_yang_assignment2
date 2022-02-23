@@ -7,19 +7,20 @@ ItemType::ItemType() {
     value = 0;
 } //ItemType
 
-//overloaded function idk if i need dis tbh
-ItemType::ItemType(int num) {
-    value = num;
+//overloaded constructor
+ItemType::ItemType(int n) {
+    value = n;
 } //ItemType
 
 Comparison ItemType::compareTo(ItemType item) {
     if (value < item.getValue()) {
-        return Comparison.LESS;
+        return LESS;
     } else if (value == item.getValue()) {
-        return Comparison.EQUAL;
+        return EQUAL;
     } else if (value > item.getValue()) {
-        return Comparison.GREATER
+        return GREATER;
     } //if
+    return EQUAL;
 } //compareTo
 
 int ItemType::getValue() const {
