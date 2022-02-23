@@ -7,6 +7,16 @@ SortedLinkedList::SortedLinkedList() {
     length = 0;
 } //SortedLinkedList
 
+SortedLinkedList::~SortedLinkedList() {
+    //go through and delete every node
+    ListNode *temp;
+    while (head != null) {
+        temp = head;
+        head = head->next;
+        delete temp;
+    } //while
+} //desctructor
+
 int SortedLinkedList::length() const {
     return length;
 } //length
@@ -78,7 +88,20 @@ void SortedLinkedList::deleteItem(ItemType item) {
 } //deleteItem
 
 int SortedLinkedList::searchItem(ItemType item) {
-
+    ItemType *temp = head;
+    for (int i = 0; i < length; i++) {
+        if (temp == null) {
+            //end of list, do nothing
+        } else if (temp->item.compareTo(item) == Comparison.EQUALS) {
+            return i;
+        } else {
+            //we keep going
+            pretemp = temp;
+            temp = temp->next;
+        } //if
+    } //for
+    cout << "Item not found" << endl;
+    return -1;
 } //searchItem
 
 ItemType SortedLinkedList::getNextItem() {
@@ -98,7 +121,58 @@ void SortedLinkedList::resetList() {
     currentPos = head;
 } //resetList
 
+void SortedLinkedList::merge(SortedLinkedList l) {
+    bool dup = false;
+    for (int i = 0; i < l.length(); i++) {
+        if (searchItem(l.getNextItem()) != -1) {
+            cout << "Sorry. You cannot insert duplicate the item" << endl;
+            dup = true;
+            break;
+        } //if
+    } //for
+    if (dup != true) {
+        for (int i = 0; i < l.length(); i++) {
+            insertItem(l.getNextItem());
+        } //for
+    } //if
+    l.resetList();
+} //merge
 
-//mergefunction
-//delete alternate nodes
-//common elem function
+void SortedLinkedList::deleteAlt() {
+    ListNode *temp = head->next;
+    ListNode *pretemp = head;
+    while (temp != null) {
+        pretemp->next = temp->next;
+        delete temp;
+        pretemp = pretemp->next;
+        temp = pretemp->next;
+    } //for
+} //deleteAlt
+
+void SortedLinkedListd::intersection(SortedLinekdList l) {
+    ListNode *temp = head;
+    SortedLinkedList l;
+    for (int i = 0; i < l.length; ++) {
+        ItemType t = l.getNextItem();
+        for (int j = 0; j < length; j++) {
+            if (t.compareTo(getNextItem()) == Comparison.EQUAL) {
+                l.insertItem(t);
+            } //if
+        } //for
+    }//for
+    l.resetList();
+    resetList();
+    ~SortedLinkedList();
+    for (int i = 0; i < l.length; i++) {
+        insertItem(l.getNextItem());
+    } //for
+    l.resetList();
+} //intersection
+
+void SortedLinkedList::printList() {
+    ListNode *temp = head;
+    while (temp != null) {
+        cout << temp->item.getValue() << endl;
+        temp = temp->next;
+    } //while
+} //printList
