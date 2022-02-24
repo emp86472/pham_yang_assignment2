@@ -17,12 +17,12 @@ public:
     int getLength();
     void insertItem(ItemType item);
     void deleteItem(ItemType item);
-    int searchItem(ItemType item);
+    int searchItem(ItemType item, bool msg);
     ItemType getNextItem();
     void resetList();
-    void merge(SortedLinkedList l);
+    void merge(SortedLinkedList& l);
     void deleteAlt();
-    void intersection(SortedLinkedList l);
+    void intersection(SortedLinkedList& l);
     void printList();
 }; //SortedLinkedList
 

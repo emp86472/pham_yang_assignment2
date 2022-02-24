@@ -1,15 +1,18 @@
 #include "ItemType.h"
+#include <cstddef>
 
 using namespace std;
 
 //default constructor
 ItemType::ItemType() {
     value = 0;
+    isnull = false;
 } //ItemType
 
 //overloaded constructor
 ItemType::ItemType(int n) {
     value = n;
+    isnull = false;
 } //ItemType
 
 Comparison ItemType::compareTo(ItemType item) {
@@ -30,3 +33,11 @@ int ItemType::getValue() const {
 void ItemType::initialize(int num) {
     value = num;
 } //initialize
+
+bool ItemType::isNull() {
+    return isnull;
+} //
+
+void ItemType::setNull(bool b) {
+    isnull = b;
+} //

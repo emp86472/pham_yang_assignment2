@@ -2,6 +2,8 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <bits/stdc++.h>
 
 #include "SortedLinkedList.h"
 #include "ItemType.h"
@@ -19,14 +21,12 @@ int main(int argc, char *argv[]) {
         cout << argv[1] << endl;
     } // if
     else {
-        int count = 0;
+        //int count = 0;
         int numInts;
         SortedLinkedList list;
         while (file >> numInts) {
-            cout << "hi";
+            //cout << numInts << endl;
             list.insertItem(ItemType(numInts));
-            cout << count << endl;
-            count++;
         } // while
 
         file.close();
@@ -78,12 +78,18 @@ int main(int argc, char *argv[]) {
                 int number;
                 cin >> number;
                 cout << endl;
-                list.searchItem(number);
+                int index = list.searchItem(number, true);
+                if (index != -1) {
+                    cout << index << endl;
+                } //if
                 continue;
             } // if
 
             if (command == 'n') { // print next iterator value
-                cout << list.getNextItem().getValue() << endl;
+                ItemType t = list.getNextItem();
+                if (!t.isNull()) {
+                    cout << t.getValue() << endl;
+                } //if
                 continue;
             } // if
             if (command == 'r') { // reset iterator
@@ -107,16 +113,20 @@ int main(int argc, char *argv[]) {
                 SortedLinkedList list2;
                 string input;
                 cout << "List elements seperated by spaces in order: ";
+
+                //*************input stuff***
+                vector<int> nums;
+                cin.ignore();
                 getline(cin, input);
-                stringstream stream(input);
-                while(true) {
-                    int n;
-                    stream >> n;
-                    if (!stream) {
-                        break;
-                    } // if
-                    list2.insertItem(ItemType(n));
-                } // while
+                istringstream os(input);
+                int i;
+                while(os >> i) {
+                    nums.push_back(i);
+                } //while
+                for (int i = 0; i < mergeLength; i++) {
+                    list2.insertItem(ItemType(nums[i]));
+                } //for
+                //*********************
 
                 cout << "list 1: ";
                 list.printList();
@@ -126,6 +136,7 @@ int main(int argc, char *argv[]) {
 
                 list.merge(list2);
                 list.printList();
+                list2.~SortedLinkedList();
                 continue;
             } // if
             if (command == 't') { // intersection
@@ -136,17 +147,21 @@ int main(int argc, char *argv[]) {
                SortedLinkedList list2;
                string input;
                cout << "List elements seperated by spaces in order: ";
-               getline(cin, input);
-               cout << endl;
-               stringstream stream(input);
-               while(true) {
-                   int n;
-                   stream >> n;
-                   if (!stream) {
-                       break;
-                   } // if
-                   list2.insertItem(ItemType(n));
-                } // while
+
+               //*********************
+               vector<int> nums;
+                cin.ignore();
+                getline(cin, input);
+                istringstream os(input);
+                int i;
+                while(os >> i) {
+                    nums.push_back(i);
+                } //while
+                for (int i = 0; i < interLength; i++) {
+                    list2.insertItem(ItemType(nums[i]));
+                } //for
+                //*****************
+
 
                cout << "List 1: ";
                list.printList();
@@ -154,8 +169,10 @@ int main(int argc, char *argv[]) {
                cout << "List 2: ";
                list2.printList();
 
+               cout << "Intersection: ";
                list.intersection(list2);
                list.printList();
+               list2.~SortedLinkedList();
                continue;
 
             } // if

@@ -7,6 +7,7 @@ class ItemType {
 
 private:
     int value;
+    bool isnull;
 
 public:
     ItemType();
@@ -14,6 +15,8 @@ public:
     Comparison compareTo(ItemType item);
     int getValue() const;
     void initialize(int num);
+    bool isNull();
+    void setNull(bool b);
 
 }; //ItemType
 
